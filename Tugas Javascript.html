@@ -41,6 +41,44 @@
 
         <button onclick="buaInputPilihan()">OK</button></button>
     </div>
-    
+    <div id="pilihanInput"></div>
+    <div id="radioArea"></div>
+    <div id="emailArea"></div>
+    <div id="output"></div>
+
+    <script>
+        let pilihhanArray = []
+        let pilihanDipilih = ""
+
+        function buatInputPilihan(){
+            let jumlah = document.getElementById("jumlah").value
+            let area = document.getElementById("pilihanInput")
+
+            if(jumlah <= 0){
+                alert("Jumlah pilihan harus lebih dari 0")
+                return
+            }
+            area.innerHTML = ""
+            for(let i=1; i<=jumlah; i++){
+                area.innerHTML +=
+                '<div>Pilihan ${i} : <input type="text" id="pilihan${i}"></div><br><br>'
+            }
+            area.innerHTML += '<button onclick="simpanPilihan()">OK</button>'
+        }
+
+        function simpanPilihan(){
+            let jumlah = document.getElementById("jumlah").value
+            pilihhanArray = []
+            for(let i=1; i<=jumlah; i++){
+                let text = document.getElementById("pilihan"+i).value
+                if(text == ""){
+                    alert("Pilihan tidak boleh kosong")
+                    return
+                }
+                pilihhanArray.push(text)
+            }
+            tampilRadio()
+        }
+    </script>
 </body>
 </html>
