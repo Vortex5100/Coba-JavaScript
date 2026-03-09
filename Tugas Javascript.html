@@ -102,6 +102,15 @@
             }
             tampilEmail()
         }
+
+        function tampilEmail(){
+            let area = document.getElementById("emailArea")
+            area.innerHTML = `<h3>Email : </h3><input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br><button onclick="prosesAkhir()">OK</button>`
+        }
+
+        function prosesAkhir(){
+            
+        }
     </script>
 </body>
 </html>
