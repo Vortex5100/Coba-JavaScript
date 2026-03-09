@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tugas 4 JavaScript</title>
     <style>
         body{
@@ -39,7 +37,7 @@
         <input type="number" id="jumlah" min="1">
         <br>
 
-        <button onclick="buaInputPilihan()">OK</button></button>
+        <button onclick="buatInputPilihan()">OK</button>
     </div>
     <div id="pilihanInput"></div>
     <div id="radioArea"></div>
@@ -47,7 +45,7 @@
     <div id="output"></div>
 
     <script>
-        let pilihhanArray = []
+        let pilihanArray = []
         let pilihanDipilih = ""
 
         function buatInputPilihan(){
@@ -83,8 +81,8 @@
         function tampilRadio(){
             let area = document.getElementById("radioArea")
             area.innerHTML = "<h3>Pilihan : </h3>"
-            for(let pilihan of pilihhanArray){
-                area.innerHTML += `<input type="radio" name="pilihan" value="${pilihanArray[i]}"> ${pilihanArray[i]}<br>`
+            for(let pilihan of pilihanArray){
+                area.innerHTML += `<input type="radio" name="pilihan" value="${pilihan}"> ${pilihan}<br>`
             }
             area.innerHTML += `<br><button onclick="pilihRadio()">OK</button>`
         }
@@ -109,7 +107,16 @@
         }
 
         function prosesAkhir(){
-            
+            let nama = document.getElementById("nama").value
+            let email = document.getElementById("email").value
+            let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+            if(!pattern.test(email)){
+                alert("Email tidak valid, masukkan ulang")
+                return
+            }
+            let jumlah = document.getElementById("jumlah").value
+            let teksPilihan = pilihanArray.join(", ")
+            document.getElementById("output").innerHTML = `<h3>Hasil :</h3>Hallo, nama saya ${nama}, email ${email}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${teksPilihan}, dan saya memilih <b>${pilihanTerpilih}</b>`
         }
     </script>
 </body>
