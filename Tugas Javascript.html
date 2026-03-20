@@ -91,30 +91,38 @@
 </head>
 
 <body>
-    <div class="header">
-        <div>
-            <h2>Nama : Ignatius Farrel Aditya Pratama</h2>
-            <h3>NIM : 245314037</h3>
+    <div class="container">
+
+        <div class="header">
+            <div>
+                <h2>Ignatius Farrel Aditya Pratama</h2>
+                <h3>NIM : 245314037</h3>
+            </div>
+
+            <img src="Ignatius Farrel Aditya Pratama.jpg" class="profile-img">
         </div>
 
-        <img src="Ignatius Farrel Aditya Pratama.jpg" alt="Foto Farrel" class="profile-img">
+        <div class="card">
+
+            <div class="section">
+                Nama :
+                <input type="text" id="nama" placeholder="Masukkan nama">
+            </div>
+
+            <div class="section">
+                Jumlah Pilihan :
+                <input type="number" id="jumlah" min="1" placeholder="Masukkan jumlah pilihan">
+                <button onclick="buatInputPilihan()">OK</button>
+            </div>
+
+            <div id="pilihanInput"></div>
+            <div id="radioArea"></div>
+            <div id="emailArea"></div>
+            <div id="output"></div>
+
+        </div>
+
     </div>
-    <div class="section">
-        Nama :
-        <input type="text" id="nama">
-        <br><br>
-
-        Jumlah Pilihan :
-        <input type="number" id="jumlah" min="1">
-        <br>
-
-        <button onclick="buatInputPilihan()">OK</button>
-    </div>
-    <div id="pilihanInput"></div>
-    <div id="radioArea"></div>
-    <div id="emailArea"></div>
-    <div id="output"></div>
-
     <script>
         let pilihanArray = []
         let pilihanDipilih = ""
@@ -213,7 +221,7 @@
             let area = document.getElementById("emailArea")
 
             area.innerHTML =
-            `
+                `
             <h3>Masukkan Email</h3>
             <input type="email" id="email" placeholder="contoh@domain.com">
             <br>
@@ -242,7 +250,7 @@
             let teksPilihan = pilihanArray.join(", ")
 
             document.getElementById("output").innerHTML =
-            `
+                `
             <h3>Hasil</h3>
             Hallo, nama saya <b>${nama}</b>. Email saya <b>${email}</b>. Saya mempunyai <b>${jumlah}</b> 
             pilihan yaitu: ${teksPilihan}. Saya memilih <b>${pilihanDipilih}</b>.
