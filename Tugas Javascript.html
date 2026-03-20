@@ -120,6 +120,7 @@
         let pilihanDipilih = ""
 
         function buatInputPilihan() {
+
             let jumlah = document.getElementById("jumlah").value
             let area = document.getElementById("pilihanInput")
 
@@ -127,72 +128,125 @@
                 alert("Jumlah pilihan harus lebih dari 0")
                 return
             }
-            area.innerHTML = ""
+
+            area.innerHTML = "<h3>Masukkan Pilihan</h3>"
+
             for (let i = 1; i <= jumlah; i++) {
+
                 area.innerHTML +=
-                    `<div>Pilihan ${i} : <input type="text" id="pilihan${i}"></div><br><br>`
+                    `
+        <div class="section">
+        Pilihan ${i}
+        <input type="text" id="pilihan${i}" placeholder="Isi pilihan ${i}">
+        </div>
+        `
             }
-            area.innerHTML += `<button onclick="simpanPilihan()">OK</button>`
+
+            area.innerHTML += `<button onclick="simpanPilihan()">Simpan Pilihan</button>`
         }
 
         function simpanPilihan() {
+
             let jumlah = document.getElementById("jumlah").value
+
             pilihanArray = []
+
             for (let i = 1; i <= jumlah; i++) {
+
                 let text = document.getElementById("pilihan" + i).value
+
                 if (text == "") {
                     alert("Pilihan tidak boleh kosong")
                     return
                 }
+
                 pilihanArray.push(text)
             }
+
             tampilRadio()
         }
 
         function tampilRadio() {
+
             let area = document.getElementById("radioArea")
-            area.innerHTML = "<h3>Pilihan : </h3>"
+
+            area.innerHTML = "<h3>Pilih Salah Satu</h3>"
+
             for (let pilihan of pilihanArray) {
-                area.innerHTML += `<input type="radio" name="pilihan" value="${pilihan}"> ${pilihan}<br>`
+
+                area.innerHTML +=
+                    `
+        <div class="radio-item">
+        <input type="radio" name="pilihan" value="${pilihan}">
+        ${pilihan}
+        </div>
+        `
             }
-            area.innerHTML += `<br><button onclick="pilihRadio()">OK</button>`
+
+            area.innerHTML += `<button onclick="pilihRadio()">Konfirmasi</button>`
         }
 
         function pilihRadio() {
+
             let radio = document.getElementsByName("pilihan")
+
             pilihanDipilih = ""
+
             for (let r of radio) {
+
                 if (r.checked) {
                     pilihanDipilih = r.value
                 }
+
             }
+
             if (pilihanDipilih == "") {
                 alert("Pilih salah satu pilihan")
                 return
             }
+
             tampilEmail()
         }
 
         function tampilEmail() {
+
             let area = document.getElementById("emailArea")
-            area.innerHTML = `<h3>Email : </h3><input type="email" id="email"><br><button onclick="prosesAkhir()">OK</button>`
+
+            area.innerHTML =
+            `
+            <h3>Masukkan Email</h3>
+            <input type="email" id="email" placeholder="contoh@domain.com">
+            <br>
+            <button onclick="prosesAkhir()">Submit</button>
+            `
         }
 
         function prosesAkhir() {
+
             let nama = document.getElementById("nama").value
             let email = document.getElementById("email").value
+
             if (nama == "") {
                 alert("Nama harus diisi")
                 return
             }
+
             let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
+
             if (!pattern.test(email)) {
-                alert("Email tidak valid, masukkan ulang")
+                alert("Email tidak valid")
                 return
             }
+
             let jumlah = document.getElementById("jumlah").value
             let teksPilihan = pilihanArray.join(", ")
-            document.getElementById("output").innerHTML = `<h3>Hasil :</h3>Hallo, nama saya ${nama}, email ${email}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${teksPilihan}, dan saya memilih <b>${pilihanDipilih}</b>`
+
+            document.getElementById("output").innerHTML =
+            `
+            <h3>Hasil</h3>
+            Hallo, nama saya <b>${nama}</b>. Email saya <b>${email}</b>. Saya mempunyai <b>${jumlah}</b> 
+            pilihan yaitu: ${teksPilihan}. Saya memilih <b>${pilihanDipilih}</b>.
+            `
         }
     </script>
 </body>
