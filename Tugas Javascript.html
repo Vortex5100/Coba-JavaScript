@@ -1,39 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <title>Tugas 4 JavaScript</title>
     <style>
-        body{
+        body {
             font-family: Arial, sans-serif;
-            margin:40px;
+            background: linear-gradient(120deg, #00004a, #8d3cff);
+            margin: 0;
+            padding: 40px;
         }
-        .header{
-            border-bottom:1px solid #000;
-            margin-bottom:20px;
+
+        .container {
+            max-width: 800px;
+            margin: auto;
         }
-        img{
-            width:80px;
+
+        .header {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
-        .section{
-            margin-top:15px;
+
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #4facfe;
         }
-        button{
-            margin-top:10px;
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .section {
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 8px;
+            margin-top: 5px;
+            width: 100%;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background: #4facfe;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #6155ff;
+        }
+
+        .reset {
+            background: #ff5c5c;
+        }
+
+        .reset:hover {
+            background: #d60000;
+        }
+
+        #output {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f1f1f1;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .radio-item {
+            margin-top: 8px;
         }
     </style>
 </head>
+
 <body>
     <div class="header">
-        <h2>Nama : Igantius Farrel Aditya Pratama</h2>
-        <h3>NIM : 245314037</h3>
-        <img src="Ignatius Farrel Aditya Pratama.jpg" alt="Foto Farrel" width="200">
+        <div>
+            <h2>Nama : Ignatius Farrel Aditya Pratama</h2>
+            <h3>NIM : 245314037</h3>
+        </div>
+
+        <img src="Ignatius Farrel Aditya Pratama.jpg" alt="Foto Farrel" class="profile-img">
     </div>
     <div class="section">
-        Nama : 
+        Nama :
         <input type="text" id="nama">
         <br><br>
 
-        Jumlah Pilihan : 
+        Jumlah Pilihan :
         <input type="number" id="jumlah" min="1">
         <br>
 
@@ -48,76 +119,82 @@
         let pilihanArray = []
         let pilihanDipilih = ""
 
-        function buatInputPilihan(){
+        function buatInputPilihan() {
             let jumlah = document.getElementById("jumlah").value
             let area = document.getElementById("pilihanInput")
 
-            if(jumlah <= 0){
+            if (jumlah <= 0) {
                 alert("Jumlah pilihan harus lebih dari 0")
                 return
             }
             area.innerHTML = ""
-            for(let i=1; i<=jumlah; i++){
+            for (let i = 1; i <= jumlah; i++) {
                 area.innerHTML +=
-                `<div>Pilihan ${i} : <input type="text" id="pilihan${i}"></div><br><br>`
+                    `<div>Pilihan ${i} : <input type="text" id="pilihan${i}"></div><br><br>`
             }
             area.innerHTML += `<button onclick="simpanPilihan()">OK</button>`
         }
 
-        function simpanPilihan(){
+        function simpanPilihan() {
             let jumlah = document.getElementById("jumlah").value
-            pilihhanArray = []
-            for(let i=1; i<=jumlah; i++){
-                let text = document.getElementById("pilihan"+i).value
-                if(text == ""){
+            pilihanArray = []
+            for (let i = 1; i <= jumlah; i++) {
+                let text = document.getElementById("pilihan" + i).value
+                if (text == "") {
                     alert("Pilihan tidak boleh kosong")
                     return
                 }
-                pilihhanArray.push(text)
+                pilihanArray.push(text)
             }
             tampilRadio()
         }
 
-        function tampilRadio(){
+        function tampilRadio() {
             let area = document.getElementById("radioArea")
             area.innerHTML = "<h3>Pilihan : </h3>"
-            for(let pilihan of pilihanArray){
+            for (let pilihan of pilihanArray) {
                 area.innerHTML += `<input type="radio" name="pilihan" value="${pilihan}"> ${pilihan}<br>`
             }
             area.innerHTML += `<br><button onclick="pilihRadio()">OK</button>`
         }
 
-        function pilihRadio(){
-            let radio = documentsByName("pilihan")
-            for(let r of radio){
-                if(r.checked){
+        function pilihRadio() {
+            let radio = document.getElementsByName("pilihan")
+            pilihanDipilih = ""
+            for (let r of radio) {
+                if (r.checked) {
                     pilihanDipilih = r.value
                 }
             }
-            if(pilihanDipilih == ""){
+            if (pilihanDipilih == "") {
                 alert("Pilih salah satu pilihan")
                 return
             }
             tampilEmail()
         }
 
-        function tampilEmail(){
+        function tampilEmail() {
             let area = document.getElementById("emailArea")
-            area.innerHTML = `<h3>Email : </h3><input type="email" id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br><button onclick="prosesAkhir()">OK</button>`
+            area.innerHTML = `<h3>Email : </h3><input type="email" id="email"><br><button onclick="prosesAkhir()">OK</button>`
         }
 
-        function prosesAkhir(){
+        function prosesAkhir() {
             let nama = document.getElementById("nama").value
             let email = document.getElementById("email").value
+            if (nama == "") {
+                alert("Nama harus diisi")
+                return
+            }
             let pattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/
-            if(!pattern.test(email)){
+            if (!pattern.test(email)) {
                 alert("Email tidak valid, masukkan ulang")
                 return
             }
             let jumlah = document.getElementById("jumlah").value
             let teksPilihan = pilihanArray.join(", ")
-            document.getElementById("output").innerHTML = `<h3>Hasil :</h3>Hallo, nama saya ${nama}, email ${email}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${teksPilihan}, dan saya memilih <b>${pilihanTerpilih}</b>`
+            document.getElementById("output").innerHTML = `<h3>Hasil :</h3>Hallo, nama saya ${nama}, email ${email}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${teksPilihan}, dan saya memilih <b>${pilihanDipilih}</b>`
         }
     </script>
 </body>
+
 </html>
